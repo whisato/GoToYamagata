@@ -10,7 +10,7 @@ var app = express();
 
 app.use(helmet());
 
-// view engine setup
+/* view engine setup */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,34 +20,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// DB setup
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'Pass@1234',
-//   database: 'Goto'
-// });
+/* Set which database to connect */
+const connection = mysql.createConnection({
+  host: 'mumu-mysql.cdh264nx0iwk.ap-northeast-1.rds.amazonaws.com',
+  user: 'root',
+  password: 'Pass1234',
+  database: 'Goto'
+});
 
-// connection.connect(function(err) {
-// 	if (err) throw err;
-// 	console.log('Connected');
-// 	const sql = "select * from questionnaire"
-// 	connection.query(sql, function (err, result, fields) {
-// 	if (err) throw err;
-// 	console.log(result)
-// 	});
-// });
+/* Start connecting to the database */
+connection.connect(function(err) {
+	if (err) throw err;
+	console.log('Connected');
+	const sql = "select * from questionnaire"
+	connection.query(sql, function (err, result, fields) {
+	if (err) throw err;
+	console.log(result)
+	});
+});
 
-// app.post('/', (req, res) => {
-// 	const sql = "INSERT INTO questionnaire SET ?"
-// 	connection.query(sql,req.body,function(err, result, fields){
-// 		if (err) throw err;
-// 		console.log(result);
-// 		res.render("presents.ejs");
-// 	});
-// });
+app.post('/', (req, res) => {
+	const sql = "INSERT INTO questionnaire SET ?"
+	connection.query(sql,req.body,function(err, result, fields){
+		if (err) throw err;
+		console.log(result);
+		res.render("presents.ejs");
+	});
+});
 
-// rooting page
+/* rooting page */
 app.get('/', function(req, res, next) {
   res.render("./index.ejs");
 });
@@ -74,18 +75,18 @@ app.get('/form', function(req, res, next) {
   res.render("form.ejs");
 });
 
-// catch 404 and forward to error handler
+/* catch 404 and forward to error handler */
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+/* error handler */
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  /* render the error page */
   res.status(err.status || 500);
   res.render('error');
 });

@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // const connection = mysql.createConnection({
 //   host: 'localhost',
 //   user: 'root',
-//   password: 'pass',
+//   password: 'Pass@1234',
 //   database: 'Goto'
 // });
 
@@ -51,28 +51,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res, next) {
   res.render("./index.ejs");
 });
-// app.get('/quiz', function(req, res, next) {
-//   res.render("quiz.ejs");
-// });
-// app.get('/presents', function(req, res, next) {
-//   res.render("presents.ejs");
-// });
-// app.get('/profile', function(req, res, next) {
-//   res.render("profile.ejs");
-// });
-// app.get('/questionnaire', function(req, res, next) {
-//   res.render("questionnaire.ejs");
-// });
-// app.get('/answer', (req, res) => {
-// 	const sql = "select * from questionnaire";
-// 	connection.query(sql, function (err, result, fields) {
-// 	if (err) throw err;
-// 	res.render("answer",{values : result});
-// 	});
-// });
-// app.get('/form', function(req, res, next) {
-//   res.render("form.ejs");
-// });
+app.get('/quiz', function(req, res, next) {
+  res.render("quiz.ejs");
+});
+app.get('/presents', function(req, res, next) {
+  res.render("presents.ejs");
+});
+app.get('/profile', function(req, res, next) {
+  res.render("profile.ejs");
+});
+app.get('/questionnaire', function(req, res, next) {
+  res.render("questionnaire.ejs");
+});
+app.get('/answer', (req, res) => {
+	const sql = "select * from questionnaire";
+	connection.query(sql, function (err, result, fields) {
+	if (err) throw err;
+	res.render("answer",{values : result});
+	});
+});
+app.get('/form', function(req, res, next) {
+  res.render("form.ejs");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -90,8 +90,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8000, function(){
-  console.log("listening to PORT");
-});
+//app.listen(8000, function(){
+//  console.log("listening to PORT");
+//});
 
 module.exports = app;

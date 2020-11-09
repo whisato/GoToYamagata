@@ -1,0 +1,6 @@
+apps:
+  - name     : 'GoTo'
+    script : ./bin/www
+    watch  : true
+    instances: 0 
+    log-date-format: "YYYY-MM-DD HH:mm Z"

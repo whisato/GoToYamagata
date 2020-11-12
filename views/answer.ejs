@@ -6,13 +6,13 @@
 <body>
   <h1 class="answer_title">アンケート集計ページ</h1>
   <h1 class="tb_title">
-      年代：行きたい東北地方
+      年代：行きたい山形エリア
   </h1>
   <table class="answer_tb">
     <% values.forEach(function (value) { %>
       <tr>
         <td><%= value.age %>代：</td>
-        <td><%= value.Prefectures %>県</td>
+        <td><%= value.Prefectures %>地方</td>
       </tr>
     <% }); %>
 </body>

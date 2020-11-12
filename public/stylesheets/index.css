@@ -334,6 +334,10 @@ a.pref_btn4:hover{
   height: auto;
 }
 
+.pref_block {
+  padding-top: 30px;
+}
+
 .access_title {
   margin: 0 auto;
   padding-top: 20px;

@@ -14,9 +14,10 @@
 }
 
 .tb_title {
-  width: 400px;
+  width: 430px;
   font-size: 35px;
   font-weight: bold;
   margin: -20px auto;
-  padding: 40px 0px 0px 195px;
+  padding: 40px 0px 0px 180px;
+  text-align: center;
 }

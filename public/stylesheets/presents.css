@@ -67,21 +67,44 @@ a:hover{
   margin: 0 auto;
 }
 
+.line {
+  width: 350px;
+  height: 300px;
+}
+
 .line_id_no {
   text-align: center;
 }
 
 .line_id {
   text-align: center;
+  margin: 10px 0px 0px 0px;
 }
 
 .line_link_block {
   text-align: center;
+  border: solid 3px rgb(95, 187, 33);
+  border-radius: 10px;
+  width: 250px;
+  height: 100px;
+  margin: 0 auto;
 }
 
-.line {
-  width: 350px;
-  height: 300px;
+a.line_link {
+  display: inline-block;
+  padding: 1em 2em;
+  line-height: 1;
+  color: #fff;
+  background-color: rgb(95, 187, 33);
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: 0 6px 0 rgb(60, 121, 20);
+  transition: 0.2s;
+}
+
+a.line_link:hover{
+  box-shadow:0 4px 0 rgb(60, 121, 20);
+  margin: 2px 0 -2px 0; 
 }
 
 .thankyou2 {

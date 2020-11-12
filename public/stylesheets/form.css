@@ -20,7 +20,7 @@
   border-radius: 10px;
 }
 
-.box_block {
+.box_title_block {
   margin: 0 auto;
   width: 160px;
 }
@@ -29,6 +29,10 @@
   text-align: center;
   border-bottom: 3px solid #fccfcf;
   margin: 0px;
+}
+
+.box_block {
+  text-align: center;
 }
 
 .btn_block {

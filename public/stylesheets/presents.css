@@ -67,6 +67,18 @@ a:hover{
   margin: 0 auto;
 }
 
+.line_id_no {
+  text-align: center;
+}
+
+.line_id {
+  text-align: center;
+}
+
+.line_link_block {
+  text-align: center;
+}
+
 .line {
   width: 350px;
   height: 300px;

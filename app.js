@@ -75,6 +75,19 @@ app.get('/form', function(req, res, next) {
   res.render("form.ejs");
 });
 
+app.get('/syounai', function(req, res, next) {
+  res.render("syounai.ejs");
+});
+app.get('/okitama', function(req, res, next) {
+  res.render("okitama.ejs");
+});
+app.get('/mogami', function(req, res, next) {
+  res.render("mogami.ejs");
+});
+app.get('/murayama', function(req, res, next) {
+  res.render("murayama.ejs");
+});
+
 /* catch 404 and forward to error handler */
 app.use(function(req, res, next) {
   next(createError(404));

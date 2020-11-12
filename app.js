@@ -21,13 +21,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* Set which database to connect */
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
   host: 'mumu-mysql.cdh264nx0iwk.ap-northeast-1.rds.amazonaws.com',
   user: 'root',
   password: 'Pass1234',
   database: 'Goto'
 });
-
 /* Start connecting to the database */
 connection.connect(function(err) {
 	if (err) throw err;
@@ -38,7 +37,6 @@ connection.connect(function(err) {
 	console.log(result)
 	});
 });
-
 app.post('/', (req, res) => {
 	const sql = "INSERT INTO questionnaire SET ?"
 	connection.query(sql,req.body,function(err, result, fields){
@@ -47,23 +45,6 @@ app.post('/', (req, res) => {
 		res.render("presents.ejs");
 	});
 });
-
-/* rooting page */
-app.get('/', function(req, res, next) {
-  res.render("./index.ejs");
-});
-app.get('/quiz', function(req, res, next) {
-  res.render("quiz.ejs");
-});
-app.get('/presents', function(req, res, next) {
-  res.render("presents.ejs");
-});
-app.get('/profile', function(req, res, next) {
-  res.render("profile.ejs");
-});
-app.get('/questionnaire', function(req, res, next) {
-  res.render("questionnaire.ejs");
-});
 app.get('/answer', (req, res) => {
 	const sql = "select * from questionnaire";
 	connection.query(sql, function (err, result, fields) {
@@ -71,22 +52,26 @@ app.get('/answer', (req, res) => {
 	res.render("answer",{values : result});
 	});
 });
-app.get('/form', function(req, res, next) {
-  res.render("form.ejs");
-});
 
-app.get('/syounai', function(req, res, next) {
-  res.render("syounai.ejs");
-});
-app.get('/okitama', function(req, res, next) {
-  res.render("okitama.ejs");
-});
-app.get('/mogami', function(req, res, next) {
-  res.render("mogami.ejs");
-});
-app.get('/murayama', function(req, res, next) {
-  res.render("murayama.ejs");
-});
+/* rooting page */
+var indexRouter = require('./routes/index');
+app.use('/', indexRouter);
+var quizRouter = require('./routes/quiz');
+app.use('/quiz', quizRouter);
+var presentsRouter = require('./routes/presents');
+app.use('/presents', presentsRouter);
+var profileRouter = require('./routes/profile');
+app.use('/profile', profileRouter);
+var formRouter = require('./routes/form');
+app.use('/form', formRouter);
+var syounaiRouter = require('./routes/syounai');
+app.use('/syounai', syounaiRouter);
+var okitamaRouter = require('./routes/okitama');
+app.use('/okitama', okitamaRouter);
+var mogamiRouter = require('./routes/mogami');
+app.use('/mogami', mogamiRouter);
+var murayamaRouter = require('./routes/murayama');
+app.use('/murayama', murayamaRouter);
 
 /* catch 404 and forward to error handler */
 app.use(function(req, res, next) {

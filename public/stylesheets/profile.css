@@ -1,3 +1,14 @@
+body {
+  margin: 0px;
+  color: #410000;
+  font-family: "Helvetica Neue",
+  Arial,
+  "Hiragino Kaku Gothic ProN",
+  "Hiragino Sans",
+  Meiryo,
+  sans-serif;
+}
+
 a{
   font-size: 30px;
   text-decoration: none;
@@ -36,9 +47,5 @@ a:hover{
 .skill {
   padding:10px;
   font-size: 26px;
-  text-align: center;
-}
-
-.return {
   text-align: center;
 }

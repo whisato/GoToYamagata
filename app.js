@@ -4,9 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var helmet = require('helmet');
-var mysql = require('mysql');
 var bodyParser = require('body-parser')
 var app = express();
+const db = require('./db_connecter');
 
 app.use(helmet());
 
@@ -20,50 +20,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* Set which database to connect */
-var connection = mysql.createConnection({
-  host: 'mumu-mysql.cdh264nx0iwk.ap-northeast-1.rds.amazonaws.com',
-  user: 'root',
-  password: 'Pass1234',
-  database: 'Goto'
-});
-/* Start connecting to the database */
-connection.connect(function(err) {
-	if (err) throw err;
-	console.log('Connected');
-	const sql = "select * from questionnaire"
-	connection.query(sql, function (err, result, fields) {
-	if (err) throw err;
-	console.log(result)
-	});
-});
 app.post('/', (req, res) => {
 	const sql = "INSERT INTO questionnaire SET ?"
-	connection.query(sql,req.body,function(err, result, fields){
+	db.connection.query(sql,req.body,function(err, result, fields){
 		if (err) throw err;
 		console.log(result);
 		res.render("presents.ejs");
-	});
-});
-app.get('/answer', (req, res) => {
-	const sql = "select * from questionnaire";
-	connection.query(sql, function (err, result, fields) {
-	if (err) throw err;
-	res.render("answer",{values : result});
 	});
 });
 
 /* rooting page */
 var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
-var quizRouter = require('./routes/quiz');
-app.use('/quiz', quizRouter);
 var presentsRouter = require('./routes/presents');
 app.use('/presents', presentsRouter);
-var profileRouter = require('./routes/profile');
-app.use('/profile', profileRouter);
+var quizRouter = require('./routes/quiz');
+app.use('/quiz', quizRouter);
 var formRouter = require('./routes/form');
 app.use('/form', formRouter);
+var answerRouter = require('./routes/answer');
+app.use('/answer', answerRouter);
+var profileRouter = require('./routes/profile');
+app.use('/profile', profileRouter);
 var syounaiRouter = require('./routes/syounai');
 app.use('/syounai', syounaiRouter);
 var okitamaRouter = require('./routes/okitama');
@@ -83,7 +61,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  
   /* render the error page */
   res.status(err.status || 500);
   res.render('error');
